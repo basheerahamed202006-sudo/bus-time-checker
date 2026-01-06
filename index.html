@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Time Checker - Real-Time Bus Information</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <!-- Leaflet map library -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-sA+e2m8bJ6kQj2Z6b6xvN1fQx0Qxk0wY6b2R0Y3wQ2M=" crossorigin=""/>
+</head>
+<body>
+    <!-- ============ NAVIGATION BAR ============ -->
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <span class="animated-bus">🚌</span>
+            Bus Time Checker
+        </div>
+        <div class="navbar-end">
+            <div class="user-info">
+                <i class="fas fa-user-circle"></i>
+                <span id="user-name">User</span>
+            </div>
+            <button class="logout-btn" onclick="handleLogout()">Logout</button>
+        </div>
+    </nav>
+
+    <!-- ============ LOGIN PAGE ============ -->
+    <div class="login-page">
+        <div class="login-container">
+            <div class="login-header">
+                <div class="app-logo">
+                    <i class="fas fa-bus"></i>
+                </div>
+                <h1 class="app-title">Bus Time Checker</h1>
+                <p class="app-subtitle">Real-Time Bus Schedule & Route Information</p>
+            </div>
+
+            <form class="login-form" onsubmit="event.preventDefault(); handleLogin();">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        placeholder="Enter your username" 
+                        required 
+                        autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        placeholder="Enter your password" 
+                        required 
+                        autocomplete="off">
+                </div>
+
+                <button type="submit" class="login-btn">Sign In</button>
+                <div class="error-msg"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ============ MAIN APPLICATION ============ -->
+    <div class="app-container">
+        <!-- ============ DISTRICT PAGE ============ -->
+        <div class="page" id="district-page">
+            <div class="section-header">
+                <i class="fas fa-map-marker-alt section-icon"></i>
+                <h2 class="section-title">Select Your District</h2>
+            </div>
+            <div class="districts-grid"></div>
+        </div>
+
+        <!-- ============ AREA PAGE ============ -->
+        <div class="page" id="area-page">
+            <button class="back-button" onclick="goBack('district')">
+                <i class="fas fa-arrow-left"></i>
+                Back to Districts
+            </button>
+            <div class="section-header">
+                <i class="fas fa-city section-icon"></i>
+                <h2 class="section-title">Select Area</h2>
+            </div>
+            <div class="areas-section">
+                <div class="areas-grid"></div>
+            </div>
+        </div>
+
+        <!-- ============ BUS PAGE ============ -->
+        <div class="page" id="bus-page">
+            <button class="back-button" onclick="goBack('area')">
+                <i class="fas fa-arrow-left"></i>
+                Back to Areas
+            </button>
+            <div class="section-header">
+                <i class="fas fa-bus section-icon"></i>
+                <h2 class="section-title">Available Buses</h2>
+            </div>
+            <div class="buses-section">
+                    <div class="buses-grid"></div>
+                    <!-- Map container (hidden until a bus is viewed) -->
+                    <div id="map-overlay" class="map-overlay">
+                        <button id="close-map" class="close-map"><i class="fas fa-times"></i></button>
+                        <div id="map" class="map-container"></div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-o9N1j8g7m5n4zG1r1p2y0c4v5s6t7u8v9w0x1y2z3a4=" crossorigin=""></script>
+        <script src="script.js"></script>
+</body>
+</html>
